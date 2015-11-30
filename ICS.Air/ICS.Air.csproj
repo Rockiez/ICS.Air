@@ -34,13 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICS.Acquisition">
+    <Reference Include="ICS.Acquisition, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\codehub\ExhibitionHub\DLLs\ICS.Acquisition.dll</HintPath>
     </Reference>
-    <Reference Include="ICS.Common">
+    <Reference Include="ICS.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\codehub\ExhibitionHub\DLLs\ICS.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ICS.Models">
+    <Reference Include="ICS.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\codehub\ExhibitionHub\DLLs\ICS.Models.dll</HintPath>
     </Reference>
     <Reference Include="System" />

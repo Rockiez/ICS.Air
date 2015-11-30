@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ using System.Windows.Shapes;
 using ICS.Acquisition;
 using ICS.Models;
 using  ICS.Common;
+using ICS.Models.Com;
 
 namespace ICS.Air
 {
@@ -49,12 +51,12 @@ namespace ICS.Air
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (Global.ADAM4017Provider.CheckSerialPort(Global.ADAM4017Provider).Status == RunStatus.Success)
+            var a = new Timer(_object =>
             {
-                var timer = new LazyTimer(_sender =>
+                var statevalue = new ADAM4017(new ComSettingModel());
+                if (statevalue.CheckSerialPort(statevalue).Status != RunStatus.Failure)
                 {
-                    var t = (LazyTimer) _sender[0];
-                    var statevalue = Global.ADAM4017Provider;
+                    statevalue.SetData();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         temperature.Text = statevalue.temperatureValue;
@@ -65,9 +67,11 @@ namespace ICS.Air
                         airQ.Text = statevalue.airQualityValue;
                         airp.Text = statevalue.airPressureValue;
                     });
-                    t.Reset();
-                },100,1000);
-            }
+                }
+            },null,100,1000);
+            //不要再定时器线程中获取以外的变量。
+        }
+
         }
     }
-}
+
